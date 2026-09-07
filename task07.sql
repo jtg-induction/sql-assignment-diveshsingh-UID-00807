@@ -21,7 +21,7 @@ UNIQUE(screen_id,show_date,start_time)
 -- 7.5
 ALTER TABLE movies
  ADD CONSTRAINT chk_srating 
- CHECK(rating='G' OR rating='PG' OR rating='PG-13' OR rating='R' OR rating='');
+ CHECK(rating IN ('R','PG','G','PG-13'));
 
 -- 7.6
 INSERT INTO bookings (customer_id,showtime_id,seats_booked) 
@@ -32,3 +32,4 @@ VALUES (1,1, '2026-08-10', '19:00', 12.50)
 
 INSERT INTO movies (title,genre,rating,duration_minutes,release_year)
  VALUES ('The Last Ledger',     'Drama',    'NC-99', 124, 2024)
+
