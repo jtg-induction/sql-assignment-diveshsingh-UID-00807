@@ -6,7 +6,7 @@ Because HAVING is used with AGGREGATE functions.
 
 
 TASK 6
- use of cte when need that same query more than one time
+ use of cte  over nested subquery to improve readibility and debugging .
 
 TASK 7
  CHECK
