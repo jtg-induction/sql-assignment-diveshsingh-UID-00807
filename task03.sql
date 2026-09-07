@@ -30,3 +30,4 @@ SELECT movie_id,title,genre,rating,duration_minutes,release_year
 SELECT booking_id,customer_id,seats_booked
  FROM bookings
 WHERE status='cancelled'
+
