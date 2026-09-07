@@ -12,18 +12,16 @@ SELECT full_name FROM customers
  WHERE customer_id IN(
     SELECT b.customer_id FROM bookings AS b 
     INNER JOIN showtimes AS sh ON b.showtime_id=sh.showtime_id 
-    INNER JOIN movies AS m ON sh.movie_id=m.movie_id 
-    WHERE genre='Thriller'
+    INNER JOIN movies AS m ON sh.movie_id=m.movie_id AND m.genre='Thriller'
 );
 
 
 -- 6.3
 
 WITH thriller_showtimes AS (
-    SELECT b.customer_id FROM bookings AS b 
+     SELECT b.customer_id FROM bookings AS b 
     INNER JOIN showtimes AS sh ON b.showtime_id=sh.showtime_id 
-    INNER JOIN movies AS m ON sh.movie_id=m.movie_id 
-    WHERE genre='Thriller'
+    INNER JOIN movies AS m ON sh.movie_id=m.movie_id AND m.genre='Thriller'
 )
 SELECT full_name 
 FROM customers 
@@ -36,8 +34,8 @@ WHERE customer_id IN (
 
 WITH movie_revenue AS (
 SELECT m.movie_id,SUM(b.seats_booked * sh.ticket_price) AS revenue
-FROM showtimes AS  sh INNER JOIN bookings AS b ON sh.showtime_id=b.showtime_id INNER JOIN 
-movies AS m ON m.movie_id=sh.movie_id WHERE b.status='confirmed' GROUP BY m.movie_id  ORDER BY revenue DESC 
+FROM showtimes AS  sh INNER JOIN bookings AS b ON sh.showtime_id=b.showtime_id AND b.status='confirmed' INNER JOIN 
+movies AS m ON m.movie_id=sh.movie_id GROUP BY m.movie_id  ORDER BY revenue DESC 
 ),
 stats AS (
     SELECT AVG(revenue) FROM movie_revenue
